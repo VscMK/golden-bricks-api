@@ -1,16 +1,16 @@
-const express = require('express');
+const express = require('express')
 const router = express.Router();
-const db = require('../config/database');
+const db = require('../config/config');
 const User = require('../models/user');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
-// Get users list
 router.get('/', (req, res) =>
     User.findAll()
-    .then(users => res.render('users', {
-        users
-    }))
-    .catch(err => res.render('error', { error: err })));
+    .then(users => {
+        console.log(users);
+        res.sendStatus(200);
+
+    })
+    .catch(err => console.log(err))
+);
 
 module.exports = router;
