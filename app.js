@@ -18,10 +18,14 @@ app.listen(PORT, () =>
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Index route
+// Routes
 app.get('/', (req, res) => res.render('index', { layout: 'landing' }));
-// Gig routes
 app.use('/users', require('./routes/users'));
+app.use('/apiary', require('./routes/apiary'));
+app.use('/colony', require('./routes/colony'));
+app.use('/gondola', require('./routes/gondola'));
+app.use('/queen', require('./routes/queen'));
+
 
 module.exports = {
     app,

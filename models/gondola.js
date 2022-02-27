@@ -3,25 +3,28 @@ const Sequelize = require('sequelize');
 const db = require('../config/database')
 const DataTypes = require('sequelize/lib/data-types')
 
-const User = db.define('user', {
+const Gondola = db.define('gondola', {
     id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
     },
-    first_name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    last_name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    email: {
-        type: Sequelize.STRING,
+    apiary_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true
+        references: {
+            model: 'user',
+            key: 'id'
+        }
+    },
+    QR_code: {
+        type: Sequelize.BIGINT,
+        allowNull: false
+    },
+    no_colonies: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     },
     createdAt: {
         allowNull: false,
@@ -30,16 +33,11 @@ const User = db.define('user', {
     updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-    },
-    role: {
-        type: Sequelize.INTEGER,
-        allowNull: false
     }
-
 }, {
     freezeTableName: true,
 });
-User.associate = function(models) {
+Gondola.associate = function(models) {
     // associations can be defined here
 };
-module.exports = User
+module.exports = Gondola

@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const db = require('../config/config');
-const User = require('../controllers/users.controller')
+const Queen = require('../controllers/queen.controller');
 
-router.get('/', User.findAll);
+router.get('/', Queen.findAll);
 
 module.exports = router;

@@ -3,25 +3,34 @@ const Sequelize = require('sequelize');
 const db = require('../config/database')
 const DataTypes = require('sequelize/lib/data-types')
 
-const User = db.define('user', {
+const Apiary = db.define('apiary', {
     id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
     },
-    first_name: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    last_name: {
-        type: Sequelize.STRING,
+    QR_code: {
+        type: Sequelize.BIGINT,
         allowNull: false
     },
-    email: {
+    location_name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+    },
+    no_gondolas: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
+    fence_YN: {
+        type: Sequelize.CHAR,
+    },
+    electricity_YN: {
+        type: Sequelize.CHAR,
     },
     createdAt: {
         allowNull: false,
@@ -30,16 +39,12 @@ const User = db.define('user', {
     updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-    },
-    role: {
-        type: Sequelize.INTEGER,
-        allowNull: false
     }
 
 }, {
     freezeTableName: true,
 });
-User.associate = function(models) {
+Apiary.associate = function(models) {
     // associations can be defined here
 };
-module.exports = User
+module.exports = Apiary
