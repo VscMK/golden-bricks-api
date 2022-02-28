@@ -1,6 +1,19 @@
 'use strict';
 module.exports = {
     async up(queryInterface, Sequelize) {
+
+        await queryInterface.createTable('role', {
+            id: {
+                allowNull: false,
+                primaryKey: true,
+                type: Sequelize.INTEGER
+            },
+            description: {
+                type: Sequelize.STRING,
+                allowNull: false
+            }
+        });
+
         await queryInterface.createTable('user', {
             id: {
                 allowNull: false,
@@ -29,9 +42,13 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             },
-            role: {
+            role_id: {
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: 'role',
+                    key: 'id'
+                }
             }
         });
 
