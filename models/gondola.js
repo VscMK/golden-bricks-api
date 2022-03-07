@@ -16,7 +16,8 @@ const Gondola = db.define('gondola', {
         references: {
             model: 'user',
             key: 'id'
-        }
+        },
+        onDelete: 'CASCADE',
     },
     QR_code: {
         type: Sequelize.BIGINT,
@@ -39,5 +40,8 @@ const Gondola = db.define('gondola', {
 });
 Gondola.associate = function(models) {
     // associations can be defined here
+    this.apiary_id = this.belongsTo(models.user, {
+        foreignKey: 'id',
+    });
 };
 module.exports = Gondola

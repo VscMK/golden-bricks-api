@@ -16,7 +16,8 @@ const Queen = db.define('queen', {
         references: {
             model: 'user',
             key: 'id'
-        }
+        },
+        onDelete: 'CASCADE',
     },
     gondola_id: {
         type: Sequelize.INTEGER,
@@ -24,7 +25,8 @@ const Queen = db.define('queen', {
         references: {
             model: 'gondola',
             key: 'id'
-        }
+        },
+        onDelete: 'CASCADE',
     },
     colony_id: {
         type: Sequelize.INTEGER,
@@ -32,7 +34,8 @@ const Queen = db.define('queen', {
         references: {
             model: 'colony',
             key: 'id'
-        }
+        },
+        onDelete: 'CASCADE',
     },
     color_plate: {
         type: Sequelize.STRING,
@@ -47,15 +50,15 @@ const Queen = db.define('queen', {
         allowNull: false
     },
     clipped_YN: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
         allowNull: false,
     },
     mating_status: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
         allowNull: false,
     },
     marked_YN: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
         allowNull: false,
     },
     createdAt: {

@@ -16,7 +16,8 @@ const Colony = db.define('colony', {
         references: {
             model: 'user',
             key: 'id'
-        }
+        },
+        onDelete: 'CASCADE',
     },
     gondola_id: {
         type: Sequelize.INTEGER,
@@ -24,7 +25,8 @@ const Colony = db.define('colony', {
         references: {
             model: 'gondola',
             key: 'id'
-        }
+        },
+        onDelete: 'CASCADE',
     },
     QR_code: {
         type: Sequelize.BIGINT,
@@ -35,11 +37,11 @@ const Colony = db.define('colony', {
         allowNull: false,
     },
     queen_YN: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
         allowNull: false,
     },
     queen_alarm_YN: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
         allowNull: false,
     },
     createdAt: {

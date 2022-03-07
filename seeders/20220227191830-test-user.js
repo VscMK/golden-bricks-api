@@ -32,6 +32,7 @@ module.exports = {
                     first_name: "user1",
                     last_name: "last_name",
                     email: "user1@test.com",
+                    hashed_password: "P@ssword011",
                     role_id: 1,
                     createdAt: new Date(),
                     updatedAt: new Date()
@@ -41,6 +42,7 @@ module.exports = {
                     first_name: "user2",
                     last_name: "last_name",
                     email: "user2@test.com",
+                    hashed_password: "P@ssword011",
                     role_id: 2,
                     createdAt: new Date(),
                     updatedAt: new Date()
@@ -50,6 +52,7 @@ module.exports = {
                     first_name: "user3",
                     last_name: "last_name",
                     email: "user3@test.com",
+                    hashed_password: "P@ssword011",
                     role_id: 3,
                     createdAt: new Date(),
                     updatedAt: new Date()
@@ -59,6 +62,7 @@ module.exports = {
                     first_name: "user4",
                     last_name: "last_name",
                     email: "user4@test.com",
+                    hashed_password: "P@ssword011",
                     role_id: 4,
                     createdAt: new Date(),
                     updatedAt: new Date()
@@ -68,6 +72,7 @@ module.exports = {
                     first_name: "user5",
                     last_name: "last_name",
                     email: "user5@test.com",
+                    hashed_password: "P@ssword011",
                     role_id: 5,
                     createdAt: new Date(),
                     updatedAt: new Date()

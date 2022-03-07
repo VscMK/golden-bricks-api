@@ -23,6 +23,10 @@ const User = db.define('user', {
         allowNull: false,
         unique: true
     },
+    hashed_password: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -31,7 +35,7 @@ const User = db.define('user', {
         allowNull: false,
         type: Sequelize.DATE
     },
-    role: {
+    role_id: {
         type: Sequelize.INTEGER,
         allowNull: false
     }

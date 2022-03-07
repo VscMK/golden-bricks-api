@@ -16,7 +16,8 @@ const Apiary = db.define('apiary', {
     },
     QR_code: {
         type: Sequelize.BIGINT,
-        allowNull: false
+        allowNull: false,
+        // unique: true,
     },
     location_name: {
         type: Sequelize.STRING,
@@ -27,10 +28,10 @@ const Apiary = db.define('apiary', {
         allowNull: false,
     },
     fence_YN: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
     },
     electricity_YN: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
     },
     createdAt: {
         allowNull: false,

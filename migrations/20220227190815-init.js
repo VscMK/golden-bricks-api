@@ -34,6 +34,9 @@ module.exports = {
                 allowNull: false,
                 unique: true
             },
+            hashed_password: {
+                type: Sequelize.STRING
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
@@ -48,7 +51,7 @@ module.exports = {
                 references: {
                     model: 'role',
                     key: 'id'
-                }
+                },
             }
         });
 
@@ -76,10 +79,10 @@ module.exports = {
                 allowNull: false,
             },
             fence_YN: {
-                type: Sequelize.CHAR,
+                type: Sequelize.CHAR(1),
             },
             electricity_YN: {
-                type: Sequelize.CHAR,
+                type: Sequelize.CHAR(1),
             },
             createdAt: {
                 allowNull: false,
@@ -101,10 +104,12 @@ module.exports = {
             apiary_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                primaryKey: true,
                 references: {
                     model: 'user',
                     key: 'id'
-                }
+                },
+                onDelete: 'CASCADE',
             },
             QR_code: {
                 type: Sequelize.BIGINT,
@@ -137,7 +142,8 @@ module.exports = {
                 references: {
                     model: 'user',
                     key: 'id'
-                }
+                },
+                onDelete: 'CASCADE',
             },
             gondola_id: {
                 type: Sequelize.INTEGER,
@@ -145,7 +151,8 @@ module.exports = {
                 references: {
                     model: 'gondola',
                     key: 'id'
-                }
+                },
+                onDelete: 'CASCADE',
             },
             QR_code: {
                 type: Sequelize.BIGINT,
@@ -156,11 +163,11 @@ module.exports = {
                 allowNull: false,
             },
             queen_YN: {
-                type: Sequelize.CHAR,
+                type: Sequelize.CHAR(1),
                 allowNull: false,
             },
             queen_alarm_YN: {
-                type: Sequelize.CHAR,
+                type: Sequelize.CHAR(1),
                 allowNull: false,
             },
             createdAt: {
@@ -186,7 +193,8 @@ module.exports = {
                 references: {
                     model: 'user',
                     key: 'id'
-                }
+                },
+                onDelete: 'CASCADE',
             },
             gondola_id: {
                 type: Sequelize.INTEGER,
@@ -194,7 +202,8 @@ module.exports = {
                 references: {
                     model: 'gondola',
                     key: 'id'
-                }
+                },
+                onDelete: 'CASCADE',
             },
             colony_id: {
                 type: Sequelize.INTEGER,
@@ -202,7 +211,8 @@ module.exports = {
                 references: {
                     model: 'colony',
                     key: 'id'
-                }
+                },
+                onDelete: 'CASCADE',
             },
             color_plate: {
                 type: Sequelize.STRING,
@@ -217,15 +227,15 @@ module.exports = {
                 allowNull: false
             },
             clipped_YN: {
-                type: Sequelize.CHAR,
+                type: Sequelize.CHAR(1),
                 allowNull: false,
             },
             mating_status: {
-                type: Sequelize.CHAR,
+                type: Sequelize.CHAR(1),
                 allowNull: false,
             },
             marked_YN: {
-                type: Sequelize.CHAR,
+                type: Sequelize.CHAR(1),
                 allowNull: false,
             },
             createdAt: {
