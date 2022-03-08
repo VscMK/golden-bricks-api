@@ -14,7 +14,7 @@ const Gondola = db.define('gondola', {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'user',
+            model: 'apiary',
             key: 'id'
         },
         onDelete: 'CASCADE',
@@ -40,7 +40,7 @@ const Gondola = db.define('gondola', {
 });
 Gondola.associate = function(models) {
     // associations can be defined here
-    this.apiary_id = this.belongsTo(models.user, {
+    this.apiary_id = this.belongsTo(models.appiary, {
         foreignKey: 'id',
     });
 };
