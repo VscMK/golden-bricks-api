@@ -1,49 +1,21 @@
 'use strict';
-const Sequelize = require('sequelize');
-const db = require('../config/database')
-const DataTypes = require('sequelize/lib/data-types')
-
-const User = db.define('user', {
-    id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-    },
-    first_name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    last_name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-    },
-    hashed_password: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-    },
-    updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-    },
-    role_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {    
+    static associate(models) {
+        User.hasOne(models.Role)
     }
-
-}, {
-    freezeTableName: true,
-});
-User.associate = function(models) {
-    // associations can be defined here
+  }
+  User.init({
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    hashed_password: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
 };
-module.exports = User
