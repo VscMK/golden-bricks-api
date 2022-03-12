@@ -1,4 +1,5 @@
 const Apiary = require("../models/apiary");
+const Team = require("../models/team");
 // const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
@@ -24,16 +25,17 @@ exports.create = (req, res) => {
     const newApiary = {
         name: req.body.name,
         // seguence generator for code? AND change column name
-        QR_code: 1,
+        qr: 1,
         location_name: req.body.locationName,
-        no_gondolas: req.body.noGondolas,
-        fence_YN: req.body.fenceYN,
-        electricity_YN: req.body.electricityYN,
+        longitude: "Longitude",
+        no_colonies: req.body.noColonies,
+        fence: req.body.fence,
+        electricity: req.body.electricity,
         createdAt: new Date(),
         updatedAt: new Date(),
     };
 
-    Apiary.create(newApiary)
+    const apiary = Apiary.create(newApiary)
         .then(data => {
             res.send(data);
         })
@@ -44,6 +46,14 @@ exports.create = (req, res) => {
             })
             res.status(500).json({ errObj });
         });
+
+    // const newTeam = {
+    //     manager_id: req.body.userId,
+    //     name: "New Team",
+    //     apiary_id: apiary.apiary_id
+    // }
+
+    // Team.create(newTeam);
 };
 
 exports.update = (req, res) => {
@@ -51,14 +61,15 @@ exports.update = (req, res) => {
     Apiary.update({
             name: req.body.name,
             // seguence generator for code? AND change column name
-            QR_code: 1,
+            qr: 1,
             location_name: req.body.locationName,
-            no_gondolas: req.body.noGondolas,
-            fence_YN: req.body.fenceYN,
-            electricity_YN: req.body.electricityYN,
+            longitude: "Longitude",
+            no_colonies: req.body.noColonies,
+            fence: req.body.fence,
+            electricity: req.body.electricity,
             updatedAt: new Date(),
         }, {
-            where: { id: apiary_id }
+            where: { apiary_id: apiary_id }
         })
         .then(num => {
             if (num == 1) {
@@ -82,7 +93,7 @@ exports.update = (req, res) => {
 exports.deleteApiary = async(req, res) => {
     const apiary_id = req.params.id;
     Apiary.destroy({
-            where: { id: apiary_id }
+            where: { apiary_id: apiary_id }
         })
         .then(num => {
             if (num == 1) {
@@ -96,8 +107,10 @@ exports.deleteApiary = async(req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: "Could not delete Apiary with ID = " + apiary_id
-            });
+            // const errObj = {};
+            // err.errors.map(er => {
+            //     errObj[er.path] = er.message;
+            // })
+            res.status(500).json({ Message: err.message });
         });
 };

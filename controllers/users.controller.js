@@ -7,19 +7,15 @@ const { jwtTokens } = require('../utils/jwt-helpers.js');
 
 
 exports.findAll = (req, res, next) => {
-    try {
-        User.findAll()
-            .then(data => {
-                res.send(data);
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: err.message || "Error retrieving users."
-                });
+    User.findAll()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Error retrieving users."
             });
-    } catch (error) {
-        res.send(500).json({ error: error.message });
-    }
+        });
 };
 
 exports.register = async(req, res) => {
@@ -39,6 +35,7 @@ exports.register = async(req, res) => {
         createdAt: new Date(),
         updatedAt: new Date(),
         role_id: 1,
+        team_id: 1,
     };
 
     User.create(newUser)
@@ -46,11 +43,11 @@ exports.register = async(req, res) => {
             res.send(data);
         })
         .catch(err => {
-            const errObj = {};
-            err.errors.map(er => {
-                errObj[er.path] = er.message;
-            })
-            res.status(500).json({ errObj });
+            // const errObj = {};
+            // err.errors.map(er => {
+            //     errObj[er.path] = er.message;
+            // })
+            res.status(500).json({ Message: err.message });
         });
 };
 

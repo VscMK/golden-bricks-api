@@ -5,7 +5,7 @@ const User = require('../controllers/users.controller')
 const checkAuth = require("../utils/check.auth");
 
 
-router.get('/', checkAuth, User.findAll);
+router.get('/', User.findAll);
 router.post('/register', User.register);
 router.post('/login', User.login);
 router.delete('/delete', checkAuth, User.deleteUser);

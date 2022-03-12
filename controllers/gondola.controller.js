@@ -24,7 +24,7 @@ exports.create = (req, res) => {
     const newGondola = {
         apiary_id: req.body.apiaryId,
         // seguence generator for code? AND change column name
-        QR_code: 1,
+        qr: 1,
         no_colonies: req.body.noColonies,
         createdAt: new Date(),
         updatedAt: new Date(),

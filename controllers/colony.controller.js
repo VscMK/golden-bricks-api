@@ -23,12 +23,11 @@ exports.create = (req, res) => {
 
     const newColony = {
         apiary_id: req.body.apiaryId,
-        gondola_id: req.body.gondolaId,
         // seguence generator for code? AND change column name
-        QR_code: 1,
+        qr: 1,
         no_boxes: req.body.noBoxes,
-        queen_YN: req.body.queenYN,
-        queen_alarm_YN: req.body.queenAlarmYN,
+        queen_id: req.body.queenId,
+        queen_alarm: req.body.queenAlarm,
         createdAt: new Date(),
         updatedAt: new Date(),
     };

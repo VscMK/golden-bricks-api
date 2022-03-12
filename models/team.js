@@ -14,16 +14,10 @@
 //         }
 //     }
 //     Role.init({
-//         role_id: {
-//             allowNull: false,
-//             autoIncrement: true,
-//             primaryKey: true,
-//             type: sequelize.INTEGER
-//         },
 //         name: DataTypes.STRING
 //     }, {
 //         sequelize,
-//         modelName: 'Role',
+//         modelName: 'Team',
 //     });
 //     return Role;
 // };
@@ -34,16 +28,20 @@ const Sequelize = require('sequelize');
 const db = require('../config/database')
 const DataTypes = require('sequelize/lib/data-types')
 
-const Role = db.define('Roles', {
-    role_id: {
+const Team = db.define('Teams', {
+    team_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
     },
-    name: {
+    manager_id: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
+    },
+    apiary_id: {
+        allowNull: false,
+        type: DataTypes.INTEGER
     },
     createdAt: {
         allowNull: false,
@@ -57,7 +55,9 @@ const Role = db.define('Roles', {
 }, {
     freezeTableName: true,
 });
-Role.associate = function(models) {
+Team.associate = function(models) {
     // associations can be defined here
+    User.hasOne(models.Apiary)
+    User.hasMany(models.User)
 };
-module.exports = Role
+module.exports = Team
