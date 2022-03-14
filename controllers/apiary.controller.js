@@ -8,9 +8,7 @@ exports.findAll = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || "Error retrieving apiaries."
-            });
+            res.status(500).json({ Message: err.message });
         });
 };
 
@@ -40,11 +38,7 @@ exports.create = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            const errObj = {};
-            err.errors.map(er => {
-                errObj[er.path] = er.message;
-            })
-            res.status(500).json({ errObj });
+            res.status(500).json({ Message: err.message });
         });
 
     // const newTeam = {
@@ -83,9 +77,7 @@ exports.update = (req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: "Error updating Apiary with ID = " + apiary_id
-            });
+            res.status(500).json({ Message: err.message });
         });
 };
 
@@ -107,10 +99,6 @@ exports.deleteApiary = async(req, res) => {
             }
         })
         .catch(err => {
-            // const errObj = {};
-            // err.errors.map(er => {
-            //     errObj[er.path] = er.message;
-            // })
             res.status(500).json({ Message: err.message });
         });
 };
