@@ -7,9 +7,7 @@ exports.findAll = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || "Error retrieving colonies."
-            });
+            res.status(500).send({ Message: err.message || "Error retrieving colonies." });
         });
 };
 
@@ -23,6 +21,7 @@ exports.create = (req, res) => {
 
     const newColony = {
         apiary_id: req.body.apiaryId,
+        gondola_id: req.body.gondolaId,
         // seguence generator for code? AND change column name
         qr: 1,
         no_boxes: req.body.noBoxes,
@@ -37,11 +36,7 @@ exports.create = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            const errObj = {};
-            err.errors.map(er => {
-                errObj[er.path] = er.message;
-            })
-            res.status(500).json({ errObj });
+            res.status(500).json({ Message: err.message });
         });
 };
 
@@ -53,7 +48,7 @@ exports.update = (req, res) => {
             queen_alarm_YN: req.body.queenAlarmYN,
             updatedAt: new Date(),
         }, {
-            where: { id: colony_id }
+            where: { colony_id: colony_id }
         })
         .then(num => {
             if (num == 1) {
@@ -67,9 +62,7 @@ exports.update = (req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: "Error updating Colony with ID = " + colony_id
-            });
+            res.status(500).send({ Message: err.message });
         });
 };
 
@@ -77,7 +70,7 @@ exports.update = (req, res) => {
 exports.delete = async(req, res) => {
     const colony_id = req.params.id;
     Colony.destroy({
-            where: { id: colony_id }
+            where: { colony_id: colony_id }
         })
         .then(num => {
             if (num == 1) {
@@ -91,8 +84,6 @@ exports.delete = async(req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: "Could not delete Colony with ID = " + colony_id
-            });
+            res.status(500).send({ Message: err.message });
         });
 };

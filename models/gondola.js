@@ -36,7 +36,7 @@ const Gondola = db.define('Gondolas', {
 Gondola.associate = function(models) {
     // associations can be defined here
     Gondola.hasOne(models.Apiary)
-    Gondola.hasMany(models.GondolasColonies, {
+    Gondola.hasMany(models.Colony, {
         onDelete: 'cascade',
         hooks: true,
     })

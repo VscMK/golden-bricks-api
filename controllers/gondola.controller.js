@@ -7,9 +7,7 @@ exports.findAll = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || "Error retrieving gondolas."
-            });
+            res.status(500).send({ Message: err.message });
         });
 };
 
@@ -35,10 +33,6 @@ exports.create = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            // const errObj = {};
-            // err.errors.map(er => {
-            //     errObj[er.path] = er.message;
-            // })
             res.status(500).json({ Message: err.message });
         });
 };
@@ -49,7 +43,7 @@ exports.update = (req, res) => {
             no_colonies: req.body.noColonies,
             updatedAt: new Date(),
         }, {
-            where: { id: gondola_id }
+            where: { gondola_id: gondola_id }
         })
         .then(num => {
             if (num == 1) {
@@ -63,9 +57,7 @@ exports.update = (req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: "Error updating Gondola with ID = " + gondola_id
-            });
+            res.status(500).send({ Message: err.message });
         });
 };
 
@@ -73,7 +65,7 @@ exports.update = (req, res) => {
 exports.delete = async(req, res) => {
     const gondola_id = req.params.id;
     Gondola.destroy({
-            where: { id: gondola_id }
+            where: { gondola_id: gondola_id }
         })
         .then(num => {
             if (num == 1) {
@@ -87,8 +79,6 @@ exports.delete = async(req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).send({
-                message: "Could not delete Gondola with ID = " + gondola_id
-            });
+            res.status(500).send({ Message: err.message });
         });
 };

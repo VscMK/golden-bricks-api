@@ -123,6 +123,7 @@ module.exports = {
             apiary_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                onDelete: 'CASCADE',
             },
             qr: {
                 type: Sequelize.BIGINT,
@@ -152,6 +153,14 @@ module.exports = {
             apiary_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                onDelete: 'CASCADE',
+
+            },
+            gondola_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                onDelete: 'CASCADE',
+
             },
             qr: {
                 type: Sequelize.BIGINT,
@@ -168,31 +177,6 @@ module.exports = {
             queen_alarm: {
                 type: Sequelize.CHAR(1),
                 allowNull: false,
-            },
-            createdAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            },
-            updatedAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            }
-        });
-
-        await queryInterface.createTable('Gondolas_Colonies', {
-            gondola_colony_id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
-            gondola_id: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-            colony_id: {
-                type: Sequelize.BIGINT,
-                allowNull: false
             },
             createdAt: {
                 allowNull: false,
@@ -290,8 +274,9 @@ module.exports = {
             name: 'apiary_association',
             references: {
                 table: 'Apiary',
-                field: 'apiary_id'
+                field: 'apiary_id',
             },
+            onDelete: 'CASCADE',
         });
 
         await queryInterface.addConstraint('Colonies', {
@@ -300,40 +285,21 @@ module.exports = {
             name: 'apiary_association',
             references: {
                 table: 'Apiary',
-                field: 'apiary_id'
+                field: 'apiary_id',
             },
+            onDelete: 'CASCADE',
         });
 
-        await queryInterface.addConstraint('Gondolas_Colonies', {
-            fields: ['gondola_colony_id'],
+        await queryInterface.addConstraint('Colonies', {
+            fields: ['gondola_id'],
             type: 'foreign key',
             name: 'gondola_association',
             references: {
                 table: 'Gondolas',
-                field: 'gondola_id'
-            }
+                field: 'gondola_id',
+            },
+            onDelete: 'CASCADE',
         });
-
-        await queryInterface.addConstraint('Gondolas_Colonies', {
-            fields: ['gondola_colony_id'],
-            type: 'foreign key',
-            name: 'colony_association',
-            references: {
-                table: 'Colonies',
-                field: 'colony_id'
-            }
-        });
-
-        await queryInterface.addConstraint('Queen', {
-            fields: ['gondola_colony_id'],
-            type: 'foreign key',
-            name: 'gondola_colony_association',
-            references: {
-                table: 'Gondolas_Colonies',
-                field: 'gondola_colony_id'
-            }
-        });
-
 
     },
 

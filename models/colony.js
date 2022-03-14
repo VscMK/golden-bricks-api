@@ -14,6 +14,10 @@ const Colony = db.define('Colonies', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    gondola_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
     qr: {
         type: Sequelize.BIGINT,
         allowNull: false
@@ -44,9 +48,6 @@ const Colony = db.define('Colonies', {
 Colony.associate = function(models) {
     // associations can be defined here
     Colony.hasOne(models.Apiary)
-    Colony.hasMany(models.GondolasColonies, {
-        onDelete: 'cascade',
-        hooks: true,
-    })
+    Colony.hasOne(models.Gondola)
 };
 module.exports = Colony
