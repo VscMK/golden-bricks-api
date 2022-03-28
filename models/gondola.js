@@ -2,6 +2,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database')
 const DataTypes = require('sequelize/lib/data-types')
+const Colony = require('./colony')
 
 const Gondola = db.define('Gondolas', {
     gondola_id: {
@@ -20,7 +21,7 @@ const Gondola = db.define('Gondolas', {
     },
     no_colonies: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
     },
     createdAt: {
         allowNull: false,
@@ -35,10 +36,16 @@ const Gondola = db.define('Gondolas', {
 });
 Gondola.associate = function(models) {
     // associations can be defined here
-    Gondola.hasOne(models.Apiary)
     Gondola.hasMany(models.Colony, {
         onDelete: 'cascade',
         hooks: true,
     })
 };
+
+Gondola.hasMany(Colony, {
+    onDelete: 'cascade',
+    hooks: true,
+    foreignKey: "gondola_id"
+})
+
 module.exports = Gondola

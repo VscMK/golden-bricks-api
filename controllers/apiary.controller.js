@@ -1,9 +1,13 @@
 const Apiary = require("../models/apiary");
+const Colony = require("../models/colony");
+const Gondola = require("../models/gondola");
 const Team = require("../models/team");
 // const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
-    Apiary.findAll()
+    Apiary.findAll({
+            include: [{ all: true, nested: true }]
+        })
         .then(data => {
             res.send(data);
         })
@@ -63,7 +67,7 @@ exports.update = (req, res) => {
             electricity: req.body.electricity,
             updatedAt: new Date(),
         }, {
-            where: { apiary_id: apiary_id }
+            where: { apiary_id: apiary_id },
         })
         .then(num => {
             if (num == 1) {

@@ -131,7 +131,7 @@ module.exports = {
             },
             no_colonies: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
+                allowNull: true,
             },
             createdAt: {
                 allowNull: false,

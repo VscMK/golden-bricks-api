@@ -47,7 +47,7 @@ const Colony = db.define('Colonies', {
 });
 Colony.associate = function(models) {
     // associations can be defined here
-    Colony.hasOne(models.Apiary)
-    Colony.hasOne(models.Gondola)
+    Colony.belongsTo(models.Apiary)
+    Colony.belongsTo(models.Gondola)
 };
 module.exports = Colony

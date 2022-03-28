@@ -2,7 +2,9 @@ const Gondola = require("../models/gondola");
 // const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
-    Gondola.findAll()
+    Gondola.findAll({
+            include: [{ all: true, nested: true }]
+        })
         .then(data => {
             res.send(data);
         })
