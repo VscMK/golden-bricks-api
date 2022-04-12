@@ -54,7 +54,7 @@ exports.update = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: err.message || `Cannot update Gondola with ID = ${gondola_id}. Gondola not found.`
+                    message: `Cannot update Gondola with ID = ${gondola_id}. Gondola not found.`
                 });
             }
         })

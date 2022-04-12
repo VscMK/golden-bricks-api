@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-module.exports = new Sequelize('GOLD_BRICKS', 'postgres', 'superadmin', {
+module.exports = new Sequelize(process.env.DB, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: 'localhost',
     dialect: 'postgres',
     operatorsAliases: false,

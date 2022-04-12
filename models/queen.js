@@ -1,11 +1,10 @@
 'use strict';
 const Sequelize = require('sequelize');
 const db = require('../config/database')
-const DataTypes = require('sequelize/lib/data-types')
-const Queen = require('./queen')
+const DataTypes = require('sequelize/lib/data-types');
 
-const Colony = db.define('Colonies', {
-    colony_id: {
+const Queen = db.define('Queen', {
+    queen_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -19,21 +18,33 @@ const Colony = db.define('Colonies', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    qr: {
-        type: Sequelize.BIGINT,
+    colony_id: {
+        type: Sequelize.INTEGER,
         allowNull: false
     },
-    no_boxes: {
+    color_plate: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    number_on_plate: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    queen_id: {
-        type: Sequelize.INTEGER,
+    queen_number: {
+        type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
     },
-    queen_alarm: {
+    clipped: {
         type: Sequelize.CHAR(1),
         allowNull: false,
+    },
+    mating_status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    marked: {
+        type: Sequelize.CHAR(1),
     },
     createdAt: {
         allowNull: false,
@@ -43,17 +54,12 @@ const Colony = db.define('Colonies', {
         allowNull: false,
         type: Sequelize.DATE
     }
+
 }, {
     freezeTableName: true,
 });
-Colony.associate = function(models) {
+Queen.associate = function(models) {
     // associations can be defined here
-    Colony.belongsTo(models.Apiary)
-    Colony.belongsTo(models.Gondola)
 };
-Colony.hasOne(Queen, {
-    onDelete: 'cascade',
-    hooks: true,
-    foreignKey: "colony_id"
-})
-module.exports = Colony
+
+module.exports = Queen

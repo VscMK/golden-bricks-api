@@ -199,34 +199,142 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
-            gondola_colony_id: {
+            gondola_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-
+            },
+            colony_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false
             },
             color_plate: {
                 type: Sequelize.STRING,
                 allowNull: false
             },
-            queen_number: {
+            number_on_plate: {
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
-            queen_id: {
+            queen_number: {
                 type: Sequelize.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true,
             },
             clipped: {
                 type: Sequelize.CHAR(1),
                 allowNull: false,
             },
             mating_status: {
-                type: Sequelize.CHAR(1),
+                type: Sequelize.STRING,
                 allowNull: false,
             },
             marked: {
                 type: Sequelize.CHAR(1),
+            },
+            createdAt: {
                 allowNull: false,
+                type: Sequelize.DATE
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            }
+        });
+
+        await queryInterface.createTable('Inspection', {
+            inspection_id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER
+            },
+            colony_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+            number_of_boxes: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+            number_occupied_combs: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            number_brood_combs: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            queen_status: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            queen_status_change_reason: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
+            swarming_tendency: {
+                type: Sequelize.CHAR(1),
+                allowNull: true,
+            },
+            varoa: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            natural_varoa: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            colony_loss: {
+                type: Sequelize.CHAR(1),
+                allowNull: true,
+            },
+            pollen: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            honey: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            hygiene: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            bees_gentleness: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            food: {
+                type: Sequelize.CHAR(1),
+                allowNull: false,
+            },
+            food_type: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
+            food_ammount: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            health_condition: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            attention_needed: {
+                type: Sequelize.CHAR(1),
+                allowNull: false,
+            },
+            attention_needed_time: {
+                type: Sequelize.DATE,
+                allowNull: true,
+            },
+            total_weight: {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            },
+            comment: {
+                type: Sequelize.STRING,
+                allowNull: true,
             },
             createdAt: {
                 allowNull: false,
@@ -297,6 +405,39 @@ module.exports = {
             references: {
                 table: 'Gondolas',
                 field: 'gondola_id',
+            },
+            onDelete: 'CASCADE',
+        });
+
+        await queryInterface.addConstraint('Queen', {
+            fields: ['apiary_id'],
+            type: 'foreign key',
+            name: 'apiary_association',
+            references: {
+                table: 'Apiary',
+                field: 'apiary_id',
+            },
+            onDelete: 'CASCADE',
+        });
+
+        await queryInterface.addConstraint('Queen', {
+            fields: ['gondola_id'],
+            type: 'foreign key',
+            name: 'gondola_association',
+            references: {
+                table: 'Gondolas',
+                field: 'gondola_id',
+            },
+            onDelete: 'CASCADE',
+        });
+
+        await queryInterface.addConstraint('Queen', {
+            fields: ['colony_id'],
+            type: 'foreign key',
+            name: 'colony_association',
+            references: {
+                table: 'Colonies',
+                field: 'colony_id',
             },
             onDelete: 'CASCADE',
         });
