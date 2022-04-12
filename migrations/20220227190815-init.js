@@ -248,6 +248,10 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            apiary_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
             colony_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
@@ -286,7 +290,7 @@ module.exports = {
             },
             colony_loss: {
                 type: Sequelize.CHAR(1),
-                allowNull: true,
+                allowNull: false,
             },
             pollen: {
                 type: Sequelize.INTEGER,
