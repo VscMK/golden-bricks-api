@@ -27,6 +27,10 @@ const Colony = db.define('Colonies', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
+    list_boxes: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
     queen_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
