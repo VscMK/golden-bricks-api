@@ -1,5 +1,4 @@
 const User = require("../models/user");
-// const Op = db.Sequelize.Op;
 const db = require('../config/config');
 const bcrypt = require('bcrypt');
 const { hash } = require("bcrypt");
@@ -38,17 +37,36 @@ exports.register = async(req, res) => {
         team_id: 1,
     };
 
-    User.create(newUser)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            // const errObj = {};
-            // err.errors.map(er => {
-            //     errObj[er.path] = er.message;
-            // })
-            res.status(500).json({ Message: err.message });
-        });
+    User.findOrCreate({
+        where: {
+            email: newUser.email
+        },
+        defaults: { // set the default properties if it doesn't exist
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            hashed_password: hashedPassword,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            role_id: 1,
+            team_id: 1,
+        }
+    }).then(result => {
+        var user = result[0],
+            created = result[1];
+        if (!created) {
+            res.status(500).json({ Message: 'User already exists' });
+        } else {
+            res.status(200).json(result);
+        }
+    });
+    //     User.create(newUser)
+    //         .then(data => {
+    //             res.send(data);
+    //         })
+    //         .catch(err => {
+    //             res.status(500).json({ Message: err.message });
+    //         });
 };
 
 exports.login = async(req, res) => {

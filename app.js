@@ -37,7 +37,10 @@ app.use('/users', require('./routes/users'));
 app.use('/apiary', require('./routes/apiary'));
 app.use('/gondola', require('./routes/gondola'));
 app.use('/colony', require('./routes/colony'));
-// app.use('/queen', require('./routes/queen'));
+app.use('/queen', require('./routes/queen'));
+app.use('/inspection', require('./routes/inspection'));
+
+
 
 
 module.exports = {
