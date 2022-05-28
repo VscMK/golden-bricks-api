@@ -1,6 +1,8 @@
 const Colony = require("../models/colony");
 const Gondola = require("../models/gondola");
 // const Op = db.Sequelize.Op;
+const QRGenerator = require("../services/qrCodeGenerator")
+const QRCode = require('qrcode');
 
 exports.findAll = (req, res) => {
     Colony.findAll({
@@ -11,6 +13,21 @@ exports.findAll = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({ Message: err.message || "Error retrieving colonies." });
+        });
+};
+
+exports.findOne = (req, res) => {
+    const colony_id = req.params.id;
+    Colony.findOne({
+            where: { colony_id: colony_id },
+        }, {
+            include: [{ all: true, nested: true }]
+        })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).json({ Message: err.message });
         });
 };
 
@@ -67,6 +84,11 @@ exports.create = async(req, res) => {
 
     Colony.create(newColony)
         .then(data => {
+            colony_id = data.dataValues.colony_id;
+
+            var file = QRGenerator.createPngFile("colony_" + colony_id);
+            var qr = QRGenerator.generateQR('http://localhost:8081/colony/findOne/' + colony_id, "colony_" + colony_id);
+
             res.send(data);
         })
         .catch(err => {

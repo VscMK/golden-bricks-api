@@ -2,10 +2,27 @@ const Apiary = require("../models/apiary");
 const Colony = require("../models/colony");
 const Gondola = require("../models/gondola");
 const Team = require("../models/team");
-// const Op = db.Sequelize.Op;
+const QRGenerator = require("../services/qrCodeGenerator")
+const QRCode = require('qrcode');
+
 
 exports.findAll = (req, res) => {
     Apiary.findAll({
+            include: [{ all: true, nested: true }]
+        })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).json({ Message: err.message });
+        });
+};
+
+exports.findOne = (req, res) => {
+    const apiary_id = req.params.id;
+    Apiary.findOne({
+            where: { apiary_id: apiary_id },
+        }, {
             include: [{ all: true, nested: true }]
         })
         .then(data => {
@@ -27,7 +44,7 @@ exports.create = (req, res) => {
     const newApiary = {
         name: req.body.name,
         // seguence generator for code? AND change column name
-        qr: 1,
+        qr: "image",
         location_name: req.body.locationName,
         longitude: "Longitude",
         no_colonies: req.body.noColonies,
@@ -37,13 +54,21 @@ exports.create = (req, res) => {
         updatedAt: new Date(),
     };
 
+    var apiary_id;
+
     const apiary = Apiary.create(newApiary)
         .then(data => {
+            apiary_id = data.dataValues.apiary_id;
+
+            var file = QRGenerator.createPngFile("apiary_" + apiary_id);
+            var qr = QRGenerator.generateQR('http://localhost:8081/apiary/findOne/' + apiary_id, "apiary_" + apiary_id);
+
             res.send(data);
         })
         .catch(err => {
             res.status(500).json({ Message: err.message });
         });
+
 
     // const newTeam = {
     //     manager_id: req.body.userId,

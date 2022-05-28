@@ -6,6 +6,7 @@ const checkAuth = require("../utils/check.auth");
 
 
 router.get('/', checkAuth, Apiary.findAll);
+router.get('/findOne/:id', checkAuth, Apiary.findOne);
 router.post('/create', checkAuth, Apiary.create);
 router.put('/update/:id', checkAuth, Apiary.update);
 router.delete('/delete/:id', checkAuth, Apiary.deleteApiary);

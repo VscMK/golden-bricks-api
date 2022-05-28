@@ -5,6 +5,7 @@ const Gondola = require('../controllers/gondola.controller');
 const checkAuth = require('../utils/check.auth');
 
 router.get('/', checkAuth, Gondola.findAll);
+router.get('/findOne/:id', checkAuth, Gondola.findOne);
 router.post('/create', checkAuth, Gondola.create);
 router.put('/update/:id', checkAuth, Gondola.update);
 router.delete('/delete/:id', checkAuth, Gondola.delete);

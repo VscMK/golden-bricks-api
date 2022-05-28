@@ -82,8 +82,8 @@ module.exports = {
                 allowNull: false
             },
             qr: {
-                type: Sequelize.STRING,
-                allowNull: false
+                type: Sequelize.TEXT,
+                allowNull: true
             },
             location_name: {
                 type: Sequelize.STRING,
@@ -126,8 +126,8 @@ module.exports = {
                 onDelete: 'CASCADE',
             },
             qr: {
-                type: Sequelize.BIGINT,
-                allowNull: false
+                type: Sequelize.TEXT,
+                allowNull: true
             },
             no_colonies: {
                 type: Sequelize.INTEGER,
@@ -153,18 +153,16 @@ module.exports = {
             apiary_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-                onDelete: 'CASCADE',
-
+                onDelete: 'CASCADE'
             },
             gondola_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-                onDelete: 'CASCADE',
-
+                onDelete: 'CASCADE'
             },
             qr: {
-                type: Sequelize.BIGINT,
-                allowNull: false
+                type: Sequelize.TEXT,
+                allowNull: true
             },
             no_boxes: {
                 type: Sequelize.INTEGER,

@@ -16,7 +16,7 @@ const Apiary = db.define('Apiary', {
         allowNull: false
     },
     qr: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
         // unique: true,
     },
