@@ -31,8 +31,8 @@ const Colony = db.define('Colonies', {
         type: Sequelize.STRING,
         allowNull: true,
     },
-    queen_id: {
-        type: Sequelize.INTEGER,
+    queen: {
+        type: Sequelize.CHAR(1),
         allowNull: false,
     },
     queen_alarm: {

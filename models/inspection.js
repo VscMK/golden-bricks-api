@@ -34,6 +34,34 @@ const Inspection = db.define('Inspection', {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    queen_loss_signs: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    eggs: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    larvae: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    bee_pupae: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    adult_queen: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    cells: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    queen_replacement: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     queen_status_change_reason: {
         type: Sequelize.STRING,
         allowNull: true,
