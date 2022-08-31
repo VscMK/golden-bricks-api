@@ -59,7 +59,7 @@ exports.create = async(req, res) => {
         qr: 1,
         no_boxes: req.body.noBoxes,
         no_colonies: noColonies++,
-        queen_id: req.body.queenId,
+        queen: req.body.queen,
         queen_alarm: req.body.queenAlarm,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -78,7 +78,7 @@ exports.update = (req, res) => {
     const colony_id = req.params.id;
     Colony.update({
             no_boxes: req.body.noBoxes,
-            queen_YN: req.body.queenYN,
+            queen: req.body.queen,
             queen_alarm_YN: req.body.queenAlarmYN,
             updatedAt: new Date(),
         }, {
