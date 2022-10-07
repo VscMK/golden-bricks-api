@@ -79,7 +79,7 @@ exports.update = (req, res) => {
     Colony.update({
             no_boxes: req.body.noBoxes,
             queen: req.body.queen,
-            queen_alarm_YN: req.body.queenAlarmYN,
+            queen_alarm: req.body.queenAlarm,
             updatedAt: new Date(),
         }, {
             where: { colony_id: colony_id }
